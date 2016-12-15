@@ -1,0 +1,32 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+ 
+int main()
+{
+  system("clear");
+  char *user;
+  char *exec;
+  user = malloc(256*sizeof(char*));
+  exec = malloc(256*sizeof(char*));
+  user = getenv("USER");
+
+  sprintf(exec, "/home/%s/.profile", user);
+  printf("<%s>\n", exec);
+		
+  
+  
+    FILE* profile = NULL;
+    profile = fopen(exec,"a+");
+ 
+    fprintf(profile,"export EXIASAVER_HOME=DEFAULT\nexport EXIASAVER1_PBM=DEFAULT\n");
+    fprintf(profile,"export EXIASAVER2_PBM=DEFAULT\nexport EXIASAVER2_TAILLE=DEFAULT\n");
+    fprintf(profile,"export EXIASAVER2_SLEEP=DEFAULT\nexport EXIASAVER3_PBM=DEFAULT\n");
+    fclose(profile);
+
+    printf("Installation de la configuration terminée !\nVous pouvez toujours vous rendre dans ~/.profile pour éditer la configuration.\nCette configuration est permanente.\n");
+    system("rm installCfg");
+ 
+ 
+  return 0;
+}
