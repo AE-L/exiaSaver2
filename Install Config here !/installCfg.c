@@ -32,7 +32,7 @@ int main()
     readme();
 	
 FILE* bashh = NULL;
-sprintf(exec, "/home/%s/.bash_profile", user);
+sprintf(exec, "/home/%s/.bashrc", user);
 printf("<%s>\n", exec);
 bashh = fopen(exec,"a+");
 fprintf(bashh,"export EXIASAVER_HOME=DEFAULT\nexport EXIASAVER1_PBM=DEFAULT\n");
@@ -69,3 +69,4 @@ void readme()
 
  
 }
+
