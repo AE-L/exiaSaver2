@@ -1889,7 +1889,7 @@ int main(char **envp)
             printf(" ");
         }
 
-        printf("Actualisation dans quelque insant ");
+        printf("Actualisation dans quelques insants ");
 
         char *sleep_varEnv;
 	sleep_varEnv = malloc(16*sizeof(char*));
