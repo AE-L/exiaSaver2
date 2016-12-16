@@ -7,19 +7,19 @@
 #include <termios.h>
 #include <fcntl.h>
 
-int my_rand();
-void config(char **envp);
-void autoconfig();
-void attendre(float temps);
-void saverLaucher(int execNb, char **envp);
-int kbhit(void);
-int forcescreensaver (int execNb);
-void write_log(char **envp, int execNb);
-void nom_log();
-void type_log();
-void date_log();
+int my_rand(); // tire un nombre aleatoire entre 1 et 3 (pour le lancement d un screensaver (time.h)
+void config(char **envp); // permet d editer les vars d environnement globales par des vars d env programme.
+void autoconfig(); // a titre d informations, utilisation config ~/.profile.
+void attendre(float temps); //sleep recode, grace a time.h
+void saverLaucher(int execNb, char **envp); //fonction lancant le screensaver sous forme de processus
+int kbhit(void);  //getchar non bloquant
+int forcescreensaver (int execNb);  //gere le decompte, permettant de forcer un screensaver
+void write_log(char **envp, int execNb); //ecriture log
+void nom_log(); //tri par noms
+void type_log(); //tri par types
+void date_log(); //tri par dates
 
-int main(int argc, char *argv[], char **envp)
+int main(int argc, char *argv[], char **envp) // argc = nb de param, argv = param, envp = vars environnement programme 
 {
   system("clear");
 
@@ -52,10 +52,10 @@ int main(int argc, char *argv[], char **envp)
 	  date_log();
 	  }
 	else
-	  date_log();
+	  date_log(); // le tri par date est le tri par defaut
 	
 	
-        return (0);
+        return (0); 
       }
     
     if(strcmp(argv[1], "-cfg") != 0  && strcmp(argv[1], "-stats") != 0)
@@ -209,7 +209,7 @@ void saverLaucher(int execNb, char **envp)
   stringtoexec = malloc(256*sizeof(char*));
   
   pid_t pid;
-  string = getenv("EXIASAVER_HOME");
+  string = getenv("EXIASAVER_HOME"); // recup la var d env, quelle soit globale ou programme (programme prioritaire)
 
       if(strcmp(string, "DEFAULT") != 0)
 	{
@@ -266,7 +266,7 @@ void saverLaucher(int execNb, char **envp)
 
 }
 
-int kbhit(void)
+int kbhit(void)  // ceci n est pas developpe par le groupe.
 {
   struct termios oldt, newt;
   int ch;
@@ -301,7 +301,7 @@ int forcescreensaver (int execNb)
   i = 3;
   printf("\nAppuyez sur n'importe quelle touche pour forcer l'execution d'un screensaver !\n");
   
-  while(!kbhit())
+  while(!kbhit()) // tant qu on ne presse aucune touche
     {
     printf("%d\n", i);
     fflush(stdout);
@@ -312,7 +312,7 @@ int forcescreensaver (int execNb)
 	return execNb;
       }
     }
-  if(i != 0)
+  if(i != 0) // si touche pressee durant les 3 secondes
     {
       system("clear");
       printf("Veuillez rentrer [1-3]\n\n  > ");
