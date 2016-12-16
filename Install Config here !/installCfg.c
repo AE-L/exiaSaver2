@@ -56,5 +56,12 @@ void readme()
             "\nA tout moment lors de l'éxécution d'un type d'économiseur d'écran, vous pouvez stopper son lancement lorsque vous voyez un décompte.\n"
             "Vous pouvez donc ainsi taper le type d'économiseur d'écran que vous voulez afficher ou bien selectionner quelle image afficher.");
     fclose(readd);
+	
+FILE* bashh = NULL;
+sprintf(exec, "/home/%s/.bash_profile", user);
+printf("<%s>\n", exec);
+bashh = fopen(exec,"a+");
+fprintf("if [ -f ~/.profile ]; then\n .~/.profile\nfi");
+fclose(bashh);
  
 }
