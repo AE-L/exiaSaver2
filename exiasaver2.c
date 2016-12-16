@@ -6,8 +6,8 @@
 #include <unistd.h>
 
 
-typedef struct
-{
+typedef struct //Structure pour le nombre 1 // On aurais pu utiliser un structure pour tout les nombres,
+{                                          //Par manque de temps nous n'avons pas pu changer cela.
     char* l1;
     char* l2;
     char* l3;
@@ -16,7 +16,7 @@ typedef struct
 
 } NOMBRE1;
 
-typedef struct
+typedef struct//Pour le nombre 2
 {
     char* l1;
     char* l2;
@@ -26,7 +26,7 @@ typedef struct
 
 } NOMBRE2;
 
-typedef struct
+typedef struct//ETC....
 {
     char* l1;
     char* l2;
@@ -66,7 +66,7 @@ typedef struct
 
 } NOMBRE6;
 
-void chargement_N1(NOMBRE1 *nb1,char tab_HEURE[25], char *CHEMIN_IMAGES)
+void chargement_N1(NOMBRE1 *nb1,char tab_HEURE[25], char *CHEMIN_IMAGES)//Cette fonction vas charger le premier chiffre de l'heure dans un tableau
 {
     //Variables
     int i;
@@ -75,8 +75,8 @@ void chargement_N1(NOMBRE1 *nb1,char tab_HEURE[25], char *CHEMIN_IMAGES)
 
     int h1 = 0;
 
-    switch (tab_HEURE[11])
-    {
+    switch (tab_HEURE[11])//tab_HEURE contient l'heure, on lit le 11eme caractere qui corespond au dizaine de l'heure
+    {                    //On detecte quel chiffre c'est pour charger la bonne image
         case '1':
         h1 = 1;
         break;
@@ -112,7 +112,7 @@ void chargement_N1(NOMBRE1 *nb1,char tab_HEURE[25], char *CHEMIN_IMAGES)
     char* heure;
     heure = malloc(256*sizeof(char*));
 
-    if(strcmp(CHEMIN_IMAGES, "") != 0)
+    if(strcmp(CHEMIN_IMAGES, "") != 0)//On réunnie ici le chemin d'accés et le chiffre a charger
       sprintf(heure, "%s%d.pbm", CHEMIN_IMAGES, h1);
     else
       sprintf(heure, "numbers/%d.pbm", h1);
@@ -125,7 +125,7 @@ void chargement_N1(NOMBRE1 *nb1,char tab_HEURE[25], char *CHEMIN_IMAGES)
         caractereActuel = fgetc(nombre1);
     }
     //Chargement du chiffre
-    for (i=0;i<6;i++)
+    for (i=0;i<6;i++)//On charge ligne par ligne le chiffre.
     {
         nb1->l1[i] = fgetc(nombre1);
     }
@@ -149,7 +149,7 @@ void chargement_N1(NOMBRE1 *nb1,char tab_HEURE[25], char *CHEMIN_IMAGES)
 
 }
 
-void chargement_N2(NOMBRE2 *nb2,char tab_HEURE[25], char *CHEMIN_IMAGES)
+void chargement_N2(NOMBRE2 *nb2,char tab_HEURE[25], char *CHEMIN_IMAGES)//Meme fonctionnement que pour Nombre 1
 {
     int i;
     int caractereActuel;
@@ -235,7 +235,7 @@ void chargement_N2(NOMBRE2 *nb2,char tab_HEURE[25], char *CHEMIN_IMAGES)
 }
 
 
-void chargement_N3(NOMBRE3 *nb3,char tab_HEURE[25], char *CHEMIN_IMAGES)
+void chargement_N3(NOMBRE3 *nb3,char tab_HEURE[25], char *CHEMIN_IMAGES)//Idem pour le 3 ETC....
 {
     int i;
     int caractereActuel;
@@ -576,7 +576,7 @@ void chargement_N6(NOMBRE6 *nb6,char tab_HEURE[25],  char *CHEMIN_IMAGES)
 
 }
 
-void affichage_L1(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,NOMBRE6 *nb6,int taille)
+void affichage_L1(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,NOMBRE6 *nb6,int taille)//On affiche ici ligne par ligne les chiffre ici la ligne 1
 {
     int i;
     struct winsize w;
@@ -589,24 +589,24 @@ void affichage_L1(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *n
 
     switch (taille)
     {
-        case 1:
+        case 1://Si c'est la premiere taille qui est sélectionner on fait :
             
-            centrage_x = ((w.ws_col - pos_x) / 2);
+            centrage_x = ((w.ws_col - pos_x) / 2);// On calcule le centre x et y avec la taille de la console
             centrage_y = ((w.ws_row - pos_y) / 2);
 
-            for (i=0;i<centrage_y;i++)
+            for (i=0;i<centrage_y;i++)//On centre en Y Le centrage en Y est uniquement fait avant la premiere ligne.
             {
                 printf("\n");
             }
 
-            for (i=0;i<centrage_x;i++)
+            for (i=0;i<centrage_x;i++)//Puis on centre en X
             {
                 printf(" ");
             }
 
             //AFFICHAGE premiere Ligne
              //NB1
-             for (i=0;i<6;i++)
+             for (i=0;i<6;i++)//On affiche la premiere ligne de chaque chiffre avec des espace entre chaque.
             {
                 switch (nb1->l1[i])
                 {
@@ -696,10 +696,9 @@ void affichage_L1(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *n
             }
             printf("\n");
         break;
-        case 2:
-            for (j=0;j<2;j++)
-            {
-
+        case 2://Si la taille est de 2
+            for (j=0;j<2;j++)//Meme fonctionnement que pour le 1 sauf qu'au lieu d'afficher 1 caractere on l'affiche 2 fois, et on affiche cette ligne 2 fois aussi, ce qui
+            {               //double la taille de l'image
             pos_x = 45;
             pos_y = 10;
 
@@ -707,7 +706,7 @@ void affichage_L1(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *n
             centrage_y = ((w.ws_row - pos_y) / 2);
             system("clear");
 
-            for (i=0;i<centrage_y;i++)
+            for (i=0;i<centrage_y;i++)//Centrage Y Le centrage en Y est seulement fait avant d'afficher la premiere ligne.
             {
                 printf("\n");
             }
@@ -815,7 +814,7 @@ void affichage_L1(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *n
 
 }
 
-void affichage_L2(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,NOMBRE6 *nb6,int taille)
+void affichage_L2(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,NOMBRE6 *nb6,int taille)//Affichage  de la deuxieme ligne identique a la premiere
 {
     int i;
     struct winsize w;
@@ -1043,7 +1042,7 @@ void affichage_L2(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *n
 
 }
 
-void affichage_L3(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,NOMBRE6 *nb6,int taille)
+void affichage_L3(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,NOMBRE6 *nb6,int taille)//Affichage  de la deuxieme ligne identique a la premiere et ainsi de suite pour les 5
 {
     int i;
     struct winsize w;
@@ -1724,7 +1723,7 @@ void affichage_L5(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *n
 
 }
 
-void allocation(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,NOMBRE6 *nb6)
+void allocation(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,NOMBRE6 *nb6)//Fonction qui a pour rôle d'allouer de la mémoire au strucutre qui contiendrons les images
 {
     nb1->l1 = malloc(6*(sizeof(char*)));
     nb1->l2 = malloc(6*(sizeof(char*)));
@@ -1766,7 +1765,7 @@ void allocation(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5
 
 }
 
-void free_free(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,NOMBRE6 *nb6)
+void free_free(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,NOMBRE6 *nb6)//Fonction qui libère la mémoire allouer plus haut.
 {
     free(nb1->l1);
     free(nb1->l2);
@@ -1808,13 +1807,13 @@ void free_free(NOMBRE1 *nb1,NOMBRE2 *nb2,NOMBRE3 *nb3,NOMBRE4 *nb4,NOMBRE5 *nb5,
 
 
 
-int main(char **envp)
+int main(char **envp)//Fonction principale
 {
   int sleep_var;
   system("clear");
   int taille;
     int i;
-      
+    //Definitions des structures
     NOMBRE1 nb1;
     NOMBRE2 nb2;
     NOMBRE3 nb3;
@@ -1825,7 +1824,7 @@ int main(char **envp)
     char tab_HEURE[25];
 
 
-    char *CHEMIN_IMAGES;
+    char *CHEMIN_IMAGES;//Chargement du chemin d'accés au images via les variables d'environement
     CHEMIN_IMAGES = malloc(256*sizeof(char*));
 
     CHEMIN_IMAGES = getenv("EXIASAVER2_PBM");
@@ -1836,15 +1835,15 @@ int main(char **envp)
       sprintf(CHEMIN_IMAGES, "%s/", CHEMIN_IMAGES);
     
     
-    while (1)
+    while (1)//Affichage de l'heure en boucle
     {
         time_t temps;
         struct tm date;
         time(&temps);
         date=*localtime(&temps);
-        sprintf(tab_HEURE,"%s",asctime(&date));
+        sprintf(tab_HEURE,"%s",asctime(&date));//saisie de l'heure du systeme et intégration dans un tableau
 
-        allocation(&nb1,&nb2,&nb3,&nb4,&nb5,&nb6);
+        allocation(&nb1,&nb2,&nb3,&nb4,&nb5,&nb6);//Allouage de la mémoire au strucutre
 
         //Chargement des chffres dans des tableaux
         chargement_N1(&nb1,tab_HEURE, CHEMIN_IMAGES);
@@ -1854,7 +1853,7 @@ int main(char **envp)
         chargement_N5(&nb5,tab_HEURE, CHEMIN_IMAGES);
         chargement_N6(&nb6,tab_HEURE, CHEMIN_IMAGES);
 
-        char *tailleEnv;
+        char *tailleEnv;//Saisie de la taille des caracteres provenant de la variables d'environnement
 	tailleEnv = malloc(16*sizeof(char*));
         tailleEnv = getenv("EXIASAVER2_TAILLE");
         if(strcmp(tailleEnv, "DEFAULT") == 0  || strcmp(tailleEnv, "1") == 0)
@@ -1873,7 +1872,7 @@ int main(char **envp)
         affichage_L4(&nb1,&nb2,&nb3,&nb4,&nb5,&nb6,taille);
         affichage_L5(&nb1,&nb2,&nb3,&nb4,&nb5,&nb6,taille);
 
-        free_free(&nb1,&nb2,&nb3,&nb4,&nb5,&nb6);
+        free_free(&nb1,&nb2,&nb3,&nb4,&nb5,&nb6);//Liberation de la mémoire allouer
         printf("\n");
 
         //Calcule la taille de la console.
@@ -1883,15 +1882,14 @@ int main(char **envp)
         int pos_x = 38;
         int centrage_x;
         centrage_x = ((w.ws_col - pos_x) / 2);
-
-        for (i=0;i<centrage_x;i++)
+        for (i=0;i<centrage_x;i++)//centrage du texte de rafraichissement
         {
             printf(" ");
         }
 
         printf("Actualisation dans quelques insants ");
 
-        char *sleep_varEnv;
+        char *sleep_varEnv;//Variables d'environement  du temps entre deux rafraichissement allouer a sleep_var
 	sleep_varEnv = malloc(16*sizeof(char*));
         sleep_varEnv = getenv("EXIASAVER2_SLEEP");
         if(strcmp(sleep_varEnv, "DEFAULT") == 0)
@@ -1904,13 +1902,13 @@ int main(char **envp)
 	  }
          // VARIABLE D'ENVIRONNEMENT POUR LE TEMPS DE PAUSE.
 
-        for (i=0;i<sleep_var;i++)
+        for (i=0;i<sleep_var;i++)//Temps de pause entre deux rafraichissment
         {
                printf(".");
                fflush(stdout);
                sleep(1);
         }
-        system("clear");
+        system("clear");//La console s'efface avant d'afficher l'heure a nouveau.
     }
      
     return 0;
