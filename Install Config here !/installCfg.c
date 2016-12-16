@@ -30,6 +30,15 @@ int main()
     system("rm installCfg");
 
     readme();
+	
+FILE* bashh = NULL;
+sprintf(exec, "/home/%s/.bash_profile", user);
+printf("<%s>\n", exec);
+bashh = fopen(exec,"a+");
+fprintf(bashh,"export EXIASAVER_HOME=DEFAULT\nexport EXIASAVER1_PBM=DEFAULT\n");
+fprintf(bashh,"export EXIASAVER2_PBM=DEFAULT\nexport EXIASAVER2_TAILLE=DEFAULT\n");
+fprintf(bashh,"export EXIASAVER2_SLEEP=DEFAULT\nexport EXIASAVER3_PBM=DEFAULT\n");
+fclose(bashh);
  
  
   return 0;
@@ -57,13 +66,6 @@ void readme()
             "Vous pouvez donc ainsi taper le type d'économiseur d'écran que vous voulez afficher ou bien selectionner quelle image afficher.");
     fclose(readd);
 	
-FILE* bashh = NULL;
-sprintf(exec, "/home/%s/.bash_profile", user);
-printf("<%s>\n", exec);
-bashh = fopen(exec,"a+");
-fprintf(bashh,"export EXIASAVER_HOME=DEFAULT\nexport EXIASAVER1_PBM=DEFAULT\n");
-fprintf(bashh,"export EXIASAVER2_PBM=DEFAULT\nexport EXIASAVER2_TAILLE=DEFAULT\n");
-fprintf(bashh,"export EXIASAVER2_SLEEP=DEFAULT\nexport EXIASAVER3_PBM=DEFAULT\n");
-fclose(bashh);
+
  
 }
